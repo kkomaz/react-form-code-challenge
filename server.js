@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 // Local exports
+
 const config = require('./config/config');
 const webpackDevServer = require('./utilities/webpack_dev_server');
 const isDeveloping = process.env.NODE_ENV !== 'production';
@@ -14,6 +15,7 @@ const app = express();
 // =====================================================================//
 // API routes
 // =====================================================================//
+const router = require('./src/server/router.js');
 const movies = require('./src/server/routes/movies');
 
 // =====================================================================//
@@ -44,12 +46,13 @@ app.use((req, res, next) => {
 app.use(bodyParser.json({ type: '*/*' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api', [movies]);
+router(app);
 
 // =====================================================================//
 // mongoose connection
 // =====================================================================//
 const dbName = 'movieDB';
-const connectionString='mongodb://127.0.0.1:27017/'+ dbName;
+const connectionString = `mongodb://127.0.0.1:27017/${dbName}`;
 mongoose.connect(connectionString);
 
 // =====================================================================//
