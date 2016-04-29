@@ -12,16 +12,29 @@ class RegistrationForm extends Component {
     this.state = { email: '' };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
+    this.onBlurChange = this.onBlurChange.bind(this);
   }
   onFormSubmit(event) {
     event.preventDefault();
 
     this.props.registerEmail(this.state);
-    this.setState({ email: '' });
+    this.setState({ email: '', buttonSubmit: 'inactive' });
   }
 
   onInputChange(event) {
     this.setState({ [event.target.id]: event.target.value });
+  }
+
+  onBlurChange(event) {
+    this.setState({ [event.target.id]: event.target.value });
+  }
+
+  renderSubmit() {
+    if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(this.state.email)) {
+      return <button type="submit" disabled="disabled" className="button button--inactive">Submit</button>;
+    } else {
+      return <button type="submit" className="button button--active">Submit</button>;
+    }
   }
 
   render() {
@@ -34,11 +47,13 @@ class RegistrationForm extends Component {
           type="text"
           className="registration-form__email-input"
           onChange={this.onInputChange}
+          onBlur={this.onBlurChange}
           id="email"
+          value={this.state.email}
         />
 
         <div className="registration-form__submit">
-            <button type="submit" className="button button--active">Submit</button>
+            {this.renderSubmit()}
         </div>
         </form>
       </div>
