@@ -24,6 +24,10 @@ module.exports = {
         test: /\.scss$/,
         loaders: ['style', 'css', 'postcss', 'sass'],
       },
+      {
+        test: /\.(png|jpg|svg|gif)$/,
+        loader: 'file-loader',
+      },
     ],
   },
   /*eslint-disable */

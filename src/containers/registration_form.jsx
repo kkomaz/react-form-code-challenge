@@ -3,31 +3,32 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { registerEmail } from '../actions/index';
 
-const { func, obj } = React.PropTypes;
+import LoadingPlaceholder from '../components/loading_placeholder/loading_placeholder';
+
+const { func, object } = React.PropTypes;
 
 class RegistrationForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { email: '' };
+    this.state = { email: '', inProgress: false };
     this.onFormSubmit = this.onFormSubmit.bind(this);
     this.onInputChange = this.onInputChange.bind(this);
-    this.onBlurChange = this.onBlurChange.bind(this);
+    this.removeOverlay = this.removeOverlay.bind(this);
   }
 
   onFormSubmit(event) {
     event.preventDefault();
-
     this.props.registerEmail(this.state);
-    this.setState({ email: '' });
+    this.setState({ email: '', inProgress: true });
   }
 
   onInputChange(event) {
     this.setState({ [event.target.id]: event.target.value });
   }
 
-  onBlurChange(event) {
-    this.setState({ [event.target.id]: event.target.value });
+  removeOverlay() {
+    this.setState({ inProgress: false });
   }
 
   renderSubmitButton() {
@@ -38,50 +39,30 @@ class RegistrationForm extends Component {
     return <button type="submit" className="button button--active">Submit</button>;
   }
 
-  renderErrors() {
-    const { response } = this.props;
-
-    return response.data.errors.map((error) => {
-      return <li>{error}</li>;
-    });
-  }
-
-  renderResponse() {
-    const { response } = this.props;
-
-    if (response.status && response.status === 201) {
-      return <p>Thank you for subscribing!  You should receieve an email shortly!</p>;
-    }
-
-    if (response.status) {
-      let errors = this.renderErrors();
-      return <ul>{errors}</ul>;
-    }
-
-    return null;
-  }
-
   render() {
     return (
       <div className="registration-page">
+        <LoadingPlaceholder
+          inProgress={this.state.inProgress}
+          removeOverlay={this.removeOverlay}
+          response={this.props.response}
+        />
+
         <form className="registration-form" onSubmit={this.onFormSubmit}>
           <label className="registration-form__email-label">Email</label>
 
-        <input
-          type="text"
-          className="registration-form__email-input"
-          onChange={this.onInputChange}
-          onBlur={this.onBlurChange}
-          id="email"
-          value={this.state.email}
-        />
+          <input
+            type="text"
+            className="registration-form__email-input"
+            onChange={this.onInputChange}
+            value={this.state.email}
+            id="email"
+          />
 
-        <div className="registration-form__submit">
-          {this.renderSubmitButton()}
-        </div>
+          <div className="registration-form__submit">
+            {this.renderSubmitButton()}
+          </div>
         </form>
-
-        {this.renderResponse()}
       </div>
     );
   }
@@ -89,7 +70,7 @@ class RegistrationForm extends Component {
 
 RegistrationForm.propTypes = {
   registerEmail: func,
-  response: obj,
+  response: object,
 };
 
 function mapStateToProps(state) {
