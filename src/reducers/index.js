@@ -1,7 +1,8 @@
 import { combineReducers } from 'redux';
+import RegistrationFormReducer from './registration_form_reducer';
 
 const rootReducer = combineReducers({
-  state: (state = {}) => state,
+  RegistrationFormReducer,
 });
 
 export default rootReducer;
