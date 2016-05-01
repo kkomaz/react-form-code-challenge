@@ -41,29 +41,28 @@ class RegistrationForm extends Component {
 
   render() {
     return (
-      <div className="registration-page">
+      <form className="newsletter__registration-form" onSubmit={this.onFormSubmit}>
+        <h2>Get Huffington Post News, and more info, delivered to your inbox!</h2>
+
         <LoadingPlaceholder
           inProgress={this.state.inProgress}
           removeOverlay={this.removeOverlay}
           response={this.props.response}
         />
 
-        <form className="registration-form" onSubmit={this.onFormSubmit}>
-          <label className="registration-form__email-label">Email</label>
+        <input
+          type="text"
+          className="newsletter__email-input"
+          onChange={this.onInputChange}
+          value={this.state.email}
+          placeholder="Email"
+          id="email"
+        />
 
-          <input
-            type="text"
-            className="registration-form__email-input"
-            onChange={this.onInputChange}
-            value={this.state.email}
-            id="email"
-          />
-
-          <div className="registration-form__submit">
-            {this.renderSubmitButton()}
-          </div>
-        </form>
-      </div>
+        <div className="newsletter__form-submit">
+          {this.renderSubmitButton()}
+        </div>
+      </form>
     );
   }
 }

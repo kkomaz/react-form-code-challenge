@@ -5,8 +5,9 @@ export default class Newsletter extends Component {
   render() {
     return (
       <div className="newsletter">
-        <h1>Huffington Post Code Challenge</h1>
-        <RegistrationForm />
+        <div className="newsletter__register">
+          <RegistrationForm />
+        </div>
       </div>
     );
   }

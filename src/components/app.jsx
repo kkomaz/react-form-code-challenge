@@ -10,6 +10,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app-component">
+        <div className="logo"></div>
         {this.props.children}
       </div>
     );
