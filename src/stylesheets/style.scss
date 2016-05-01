@@ -12,22 +12,16 @@
 @import './mixins/media-queries';
 
 // Layouts
+@import './layouts/app-page';
 @import './layouts/error-page';
 @import './layouts/newsletter-page';
 
 // Common
 @import './_buttons';
 @import './_loader';
+@import './_header';
 
 html, body {
   background-color: $white;
   font-family: 'Open Sans', sans-serif;
-}
-
-.app-component {
-  .logo {
-    background: url("../images/homepage.gif") no-repeat center;
-    height: 50px;
-    width: 100%;
-  }
 }
