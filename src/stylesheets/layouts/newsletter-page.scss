@@ -16,14 +16,12 @@
 
   &__register {
     align-items: center;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
   }
 
   &__registration-form {
     background: $green;
-    border: 1px solid black;
     padding: 2em 3em;
   }
 
