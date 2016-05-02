@@ -14,7 +14,7 @@ import chaiJquery from 'chai-jquery';
  */
 global.document = jsdom.jsdom('<!doctype html><html?<body></body></html>');
 global.window = global.document.defaultView;
-window.navigator.userAgent.indexOf('Chrome') > -1
+global.navigator = global.window.navigator; // add global.navigator
 /**
  * Create an instance of jquery using the fake DOM created by jsdom library
  */
