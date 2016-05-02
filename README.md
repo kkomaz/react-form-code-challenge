@@ -1,13 +1,21 @@
-# webpack-express-react-template
+# Coding Challenge via React/Redux Forms
 
 ### Description
-- A work in progress webpack express with client-side React.
-- More of a personal project and still very RAW
+- Create a form that allows users to subscribe to a newsletter
 
-### Install
+### Install // Running Locally
 ```
-git clone git@github.com:kkomaz/webpack-express-react-al.git
-cd webpack-express-react-al
+git clone https://github.com/kkomaz/react-form-code-challenge
+cd react-form-code-challenge
 npm install
-npm start
+npm start (Running on localhost:3001)
 ```
+
+
+### Testing
+```
+npm test
+```
+
+### TODO
+1. Write async action tests
